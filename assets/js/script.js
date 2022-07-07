@@ -28,18 +28,14 @@
 // THEN I am again presented with current and future conditions for that city
 // ===============================================================================================
 var apiKey = '7b95122b784c566e2d331e6ea12c89d2'
-var apiKey2 = 'f517beb5dd7c96915a88f80b6509932d'
+// var apiKey2 = 'f517beb5dd7c96915a88f80b6509932d'
 // Later userSearch will be the value from my search form. It will go something like this:[var userSearch = document.getElementById('#searchInput').value]
 var userSearch = "Sacramento"
 // decalrin global variables for all functions to see
 var lat;
 var lon;
-// var weatherApiUrl = `http://api.openweathermap.org/data/3.0/onecall?lat=${lat}&lon=${lon}&appid=${apiKey}`
 var geoApiUrl = `http://api.openweathermap.org/geo/1.0/direct?q=${userSearch}&limit=5&appid=${apiKey}`
 var currentWeatherApi = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${apiKey}`
-
-
-
 
 // Fetching geocode to get lat and lon
 getLatLon();
@@ -68,27 +64,30 @@ fetch(geoApiUrl)
     console.log("windSpeed",data.wind.speed)
     console.log("humidity",data.main.humidity)
     console.log("dt",data.dt)
+    console.log("icon",data.weather[0])
 
   //  Testing create and append my data
-    var body = document.body;
-    var favoriteEl = document.createElement("div");
-    var li1 = document.createElement("p");
-    var li2 = document.createElement("p");
-    var li3 = document.createElement("p");
-    var li4 = document.createElement("p");
-    var li5 = document.createElement("p");
 
-    li1.textContent = "City: " + data.name;
-    li2.textContent = "Temp: " +  data.main.temp + " \u00B0 F";
-    li3.textContent = "Wind Speed: " + data.wind.speed + " MPH";
-    li4.textContent = "Humidity: " + data.main.humidity + " %";
-    li5.textContent = "Date " + data.dt;
+    var box = document.getElementById("box")
+    var city = document.getElementById("w1")
+    var temp = document.getElementById("w2")
+    var windSpeed = document.getElementById("w3")
+    var humidity = document.getElementById("w4")
+    var dt = document.getElementById("w5")
 
-    body.appendChild(favoriteEl);
-    favoriteEl.appendChild(li1);
-    favoriteEl.appendChild(li2);
-    favoriteEl.appendChild(li3);
-    favoriteEl.appendChild(li4);
+    city.textContent = "City: " + data.name + "," + data.dt;
+    temp.textContent = "Temp: " +  data.main.temp + " \u00B0 F";
+    windSpeed.textContent = "Wind Speed: " + data.wind.speed + " MPH";
+    humidity.textContent = "Humidity: " + data.main.humidity + " %";
+    // dt.textContent = "Date " + data.dt;
+
+    // appendChild(city);
+    // appendChild(temp);
+    // appendChild(windSpeed);
+    // appendChild(humidity);
+    // appendChild(dt);
+
+    box.setAttribute("style", "padding: 10px; border: 2px solid black;");
     
   })
 }
