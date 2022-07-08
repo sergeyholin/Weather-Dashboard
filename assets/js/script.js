@@ -36,6 +36,9 @@ var lat;
 var lon;
 var geoApiUrl = `http://api.openweathermap.org/geo/1.0/direct?q=${userSearch}&limit=5&appid=${apiKey}`
 var currentWeatherApi = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${apiKey}`
+var oneCallApi = `https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&appid=${apiKey}`
+
+var today = moment();
 
 // Fetching geocode to get lat and lon
 getLatLon();
@@ -54,6 +57,7 @@ fetch(geoApiUrl)
   
   // Fetching CurrentWeather Data using previosly gotten Lat & Lon
   fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${apiKey}&units=imperial`)
+
   .then(function(response){
     return response.json();
   }).then(function(data){
@@ -63,32 +67,61 @@ fetch(geoApiUrl)
     console.log("temp",data.main.temp)
     console.log("windSpeed",data.wind.speed)
     console.log("humidity",data.main.humidity)
-    console.log("dt",data.dt)
-    console.log("icon",data.weather[0])
-
-  //  Testing create and append my data
-
+    console.log("icon",data.weather[0].icon)
+    // Dynamically appending data to the HTML
     var box = document.getElementById("box")
     var city = document.getElementById("w1")
     var temp = document.getElementById("w2")
     var windSpeed = document.getElementById("w3")
     var humidity = document.getElementById("w4")
-    var dt = document.getElementById("w5")
+    var uvi = document.getElementById("w5")
 
-    city.textContent = "City: " + data.name + "," + data.dt;
+    city.textContent = "City: " + data.name + ", " + today.format("MMM Do, YYYY");
     temp.textContent = "Temp: " +  data.main.temp + " \u00B0 F";
     windSpeed.textContent = "Wind Speed: " + data.wind.speed + " MPH";
     humidity.textContent = "Humidity: " + data.main.humidity + " %";
-    // dt.textContent = "Date " + data.dt;
-
-    // appendChild(city);
-    // appendChild(temp);
-    // appendChild(windSpeed);
-    // appendChild(humidity);
-    // appendChild(dt);
 
     box.setAttribute("style", "padding: 10px; border: 2px solid black;");
+    // Geting UV index and appending it to HTML
+    fetch(`https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&appid=${apiKey}&units=imperial`)
+    .then(function(response){
+      return response.json();
+    }).then(function(data){
+      console.log(data);
+      console.log("uvIndex",data.current.uvi)
+
+      uvi.textContent = "UV Index: " + data.current.uvi;
+      // uvi.setAttribute("style", "background-color: green;");
+
+    })
     
-  })
+    })
 }
 )};
+// 5 day forecast
+getFiveDayForecast();
+
+function getFiveDayForecast(){
+  fetch(geoApiUrl)
+  .then(function(response){
+    return response.json();
+  }).then(function(data){
+    console.log(data);
+    // grabbing Lat & Lon from Geocoding API and turning them into a variable i can use for One Call API
+    console.log("lat",data[0].lat)
+    console.log("lon",data[0].lon)
+    // giving value to global variables
+    lat = data[0].lat;
+    lon = data[0].lon;
+
+  fetch(`api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=${apiKey}`)
+
+  .then(function(response){
+    return response.json();
+  }).then(function(data){
+    console.log(data);
+
+
+  })
+  })
+}
