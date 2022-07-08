@@ -81,7 +81,7 @@ fetch(geoApiUrl)
     var humidity = document.getElementById("w4")
     var uvi = document.getElementById("w5")
 
-    city.textContent = "City: " + data.name + ", " + today.format("MMM Do, YYYY");
+    city.textContent = "City: " + data.name + ", " + today.format("L");
     temp.textContent = "Temp: " +  data.main.temp + " \u00B0 F";
     windSpeed.textContent = "Wind Speed: " + data.wind.speed + " MPH";
     humidity.textContent = "Humidity: " + data.main.humidity + " %";
@@ -131,6 +131,7 @@ function getFiveDayForecast(){
     console.log("wind1",data.list[3].wind.speed)
     console.log("humidity1",data.list[3].main.humidity)
 
+    var h4 = document.getElementById("h4")
     var day1 = moment().add(1,'days');
     var box1 = document.getElementById("box-1")
     var date1 = document.getElementById("w1-1")
@@ -140,7 +141,8 @@ function getFiveDayForecast(){
     var humidity1 = document.getElementById("w5-1")
 
     box1.setAttribute("style", "color: white; background-color: grey; padding-left: 10px; padding-bottom: 1px;");
-    date1.textContent = day1.format("MMM Do, YYYY");
+    h4.textContent = "5-Day Forecast:";
+    date1.textContent = day1.format("L");
     temp1.textContent = "Temp: " + data.list[3].main.temp + " \u00B0 F";
     windSpeed1.textContent = "Wind: " + data.list[3].wind.speed + " MPH";
     humidity1.textContent = "Humidity: " + data.list[3].main.humidity + " %";
@@ -159,7 +161,7 @@ function getFiveDayForecast(){
     var humidity2 = document.getElementById("w5-2")
 
     box2.setAttribute("style", "color: white; background-color: grey; padding-left: 10px; padding-bottom: 1px;");
-    date2.textContent = day2.format("MMM Do, YYYY");
+    date2.textContent = day2.format("L");
     temp2.textContent = "Temp: " + data.list[11].main.temp + " \u00B0 F";
     windSpeed2.textContent = "Wind: " + data.list[11].wind.speed + " MPH";
     humidity2.textContent = "Humidity: " + data.list[11].main.humidity + " %";
@@ -178,7 +180,7 @@ function getFiveDayForecast(){
     var humidity3 = document.getElementById("w5-3")
 
     box3.setAttribute("style", "color: white; background-color: grey; padding-left: 10px; padding-bottom: 1px;");
-    date3.textContent = day3.format("MMM Do, YYYY");
+    date3.textContent = day3.format("L");
     temp3.textContent = "Temp: " + data.list[19].main.temp + " \u00B0 F";
     windSpeed3.textContent = "Wind: " + data.list[19].wind.speed + " MPH";
     humidity3.textContent = "Humidity: " + data.list[19].main.humidity + " %";
@@ -197,7 +199,7 @@ function getFiveDayForecast(){
     var humidity4 = document.getElementById("w5-4")
 
     box4.setAttribute("style", "color: white; background-color: grey; padding-left: 10px; padding-bottom: 1px;");
-    date4.textContent = day4.format("MMM Do, YYYY");
+    date4.textContent = day4.format("L");
     temp4.textContent = "Temp: " + data.list[27].main.temp + " \u00B0 F";
     windSpeed4.textContent = "Wind: " + data.list[27].wind.speed + " MPH";
     humidity4.textContent = "Humidity: " + data.list[27].main.humidity + " %";
@@ -216,7 +218,7 @@ function getFiveDayForecast(){
     var humidity5 = document.getElementById("w5-5")
 
     box5.setAttribute("style", "color: white; background-color: grey; padding-left: 10px; padding-bottom: 1px;");
-    date5.textContent = day5.format("MMM Do, YYYY");
+    date5.textContent = day5.format("L");
     temp5.textContent = "Temp: " + data.list[35].main.temp + " \u00B0 F";
     windSpeed5.textContent = "Wind: " + data.list[35].wind.speed + " MPH";
     humidity5.textContent = "Humidity: " + data.list[35].main.humidity + " %";
