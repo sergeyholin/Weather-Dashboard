@@ -1,3 +1,8 @@
+// app.use(function(req, res, next) {
+//   res.header("Access-Control-Allow-Origin", "YOUR-DOMAIN.TLD"); // update to match the domain you will make the request from
+//   res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+//   next();
+// });
 // Imperial units of measurements: api.openweathermap.org/data/3.0/onecall?lat=30.489772&lon=-99.771335&units=imperial [NOTE:&units=imperial]
 // ======================================================
 // Geocoding, input city name and the geocoding api will give you Lat and Lon: (http://api.openweathermap.org/geo/1.0/direct?q={city name},{state code},{country code}&limit={limit}&appid={API key})
@@ -114,13 +119,107 @@ function getFiveDayForecast(){
     lat = data[0].lat;
     lon = data[0].lon;
 
-  fetch(`api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=${apiKey}`)
+  fetch(`https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=${apiKey}&units=imperial`)
 
   .then(function(response){
     return response.json();
   }).then(function(data){
     console.log(data);
+    // Card 1
+    console.log("icon1",data.list[3].weather[0].icon)
+    console.log("temp1",data.list[3].main.temp)
+    console.log("wind1",data.list[3].wind.speed)
+    console.log("humidity1",data.list[3].main.humidity)
 
+    var day1 = moment().add(1,'days');
+    var box1 = document.getElementById("box-1")
+    var date1 = document.getElementById("w1-1")
+    var icon1 = document.getElementById("w2-1")
+    var temp1 = document.getElementById("w3-1")
+    var windSpeed1 = document.getElementById("w4-1")
+    var humidity1 = document.getElementById("w5-1")
+
+    box1.setAttribute("style", "color: white; background-color: grey; padding-left: 10px; padding-bottom: 1px;");
+    date1.textContent = day1.format("MMM Do, YYYY");
+    temp1.textContent = "Temp: " + data.list[3].main.temp + " \u00B0 F";
+    windSpeed1.textContent = "Wind: " + data.list[3].wind.speed + " MPH";
+    humidity1.textContent = "Humidity: " + data.list[3].main.humidity + " %";
+    // Card 2
+    console.log("icon2",data.list[11].weather[0].icon)
+    console.log("temp2",data.list[11].main.temp)
+    console.log("wind2",data.list[11].wind.speed)
+    console.log("humidity2",data.list[11].main.humidity)
+
+    var day2 = moment().add(2,'days');
+    var box2 = document.getElementById("box-2")
+    var date2 = document.getElementById("w1-2")
+    var icon2 = document.getElementById("w2-2")
+    var temp2 = document.getElementById("w3-2")
+    var windSpeed2 = document.getElementById("w4-2")
+    var humidity2 = document.getElementById("w5-2")
+
+    box2.setAttribute("style", "color: white; background-color: grey; padding-left: 10px; padding-bottom: 1px;");
+    date2.textContent = day2.format("MMM Do, YYYY");
+    temp2.textContent = "Temp: " + data.list[11].main.temp + " \u00B0 F";
+    windSpeed2.textContent = "Wind: " + data.list[11].wind.speed + " MPH";
+    humidity2.textContent = "Humidity: " + data.list[11].main.humidity + " %";
+    // Card 3
+    console.log("icon3",data.list[19].weather[0].icon)
+    console.log("temp3",data.list[19].main.temp)
+    console.log("wind3",data.list[19].wind.speed)
+    console.log("humidity3",data.list[19].main.humidity)
+
+    var day3 = moment().add(3,'days');
+    var box3 = document.getElementById("box-3")
+    var date3 = document.getElementById("w1-3")
+    var icon3 = document.getElementById("w2-3")
+    var temp3 = document.getElementById("w3-3")
+    var windSpeed3 = document.getElementById("w4-3")
+    var humidity3 = document.getElementById("w5-3")
+
+    box3.setAttribute("style", "color: white; background-color: grey; padding-left: 10px; padding-bottom: 1px;");
+    date3.textContent = day3.format("MMM Do, YYYY");
+    temp3.textContent = "Temp: " + data.list[19].main.temp + " \u00B0 F";
+    windSpeed3.textContent = "Wind: " + data.list[19].wind.speed + " MPH";
+    humidity3.textContent = "Humidity: " + data.list[19].main.humidity + " %";
+    // Card 4
+    console.log("icon4",data.list[27].weather[0].icon)
+    console.log("temp4",data.list[27].main.temp)
+    console.log("wind4",data.list[27].wind.speed)
+    console.log("humidity4",data.list[27].main.humidity)
+
+    var day4 = moment().add(4,'days');
+    var box4 = document.getElementById("box-4")
+    var date4 = document.getElementById("w1-4")
+    var icon4 = document.getElementById("w2-4")
+    var temp4 = document.getElementById("w3-4")
+    var windSpeed4 = document.getElementById("w4-4")
+    var humidity4 = document.getElementById("w5-4")
+
+    box4.setAttribute("style", "color: white; background-color: grey; padding-left: 10px; padding-bottom: 1px;");
+    date4.textContent = day4.format("MMM Do, YYYY");
+    temp4.textContent = "Temp: " + data.list[27].main.temp + " \u00B0 F";
+    windSpeed4.textContent = "Wind: " + data.list[27].wind.speed + " MPH";
+    humidity4.textContent = "Humidity: " + data.list[27].main.humidity + " %";
+    // Card 5
+    console.log("icon5",data.list[35].weather[0].icon)
+    console.log("temp5",data.list[35].main.temp)
+    console.log("wind5",data.list[35].wind.speed)
+    console.log("humidity5",data.list[35].main.humidity)
+
+    var day5 = moment().add(5,'days');
+    var box5 = document.getElementById("box-5")
+    var date5 = document.getElementById("w1-5")
+    var icon5 = document.getElementById("w2-5")
+    var temp5 = document.getElementById("w3-5")
+    var windSpeed5 = document.getElementById("w4-5")
+    var humidity5 = document.getElementById("w5-5")
+
+    box5.setAttribute("style", "color: white; background-color: grey; padding-left: 10px; padding-bottom: 1px;");
+    date5.textContent = day5.format("MMM Do, YYYY");
+    temp5.textContent = "Temp: " + data.list[35].main.temp + " \u00B0 F";
+    windSpeed5.textContent = "Wind: " + data.list[35].wind.speed + " MPH";
+    humidity5.textContent = "Humidity: " + data.list[35].main.humidity + " %";
 
   })
   })
