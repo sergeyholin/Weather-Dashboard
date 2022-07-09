@@ -35,20 +35,47 @@
 var apiKey = '7b95122b784c566e2d331e6ea12c89d2'
 // var apiKey2 = 'f517beb5dd7c96915a88f80b6509932d'
 // Later userSearch will be the value from my search form. It will go something like this:[var userSearch = document.getElementById('#searchInput').value]
-var userSearch = "Sacramento"
+
+
+
+
+// var userSearch = document.getElementById('#search').value
+// console.log(userSearch)
+// var userSearch = "Sacramento"
 // decalrin global variables for all functions to see
 var lat;
 var lon;
-var geoApiUrl = `http://api.openweathermap.org/geo/1.0/direct?q=${userSearch}&limit=5&appid=${apiKey}`
-var currentWeatherApi = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${apiKey}`
-var oneCallApi = `https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&appid=${apiKey}`
+var userSearch;
+var c;
+// var geoApiUrl = `http://api.openweathermap.org/geo/1.0/direct?q=${userSearch}&limit=5&appid=${apiKey}`
+// var currentWeatherApi = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${apiKey}`
+// var oneCallApi = `https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&appid=${apiKey}`
 
 var today = moment();
 
 // Fetching geocode to get lat and lon
-getLatLon();
-function getLatLon(){
-fetch(geoApiUrl)
+
+function getCurrentWeather(){
+
+var userSearch = document.getElementById('search').value;
+console.log("input",userSearch);
+// button.value = text
+var button = document.createElement("button");
+var p = document.createElement ("p")
+var body = document.getElementById("center")
+body.appendChild(button);
+button.textContent = userSearch;
+localStorage.setItem("cities", JSON.stringify(userSearch));
+button.setAttribute("class", "btn btn-primary btn-lg btn-block");
+// button.setAttribute("value", "userSearch");
+button.setAttribute("id", "last-city");
+button.setAttribute("onclick","test();");
+// button.setAttribute("onclick", "getCurrentWeather();");
+
+body.appendChild(p)
+
+
+fetch(`http://api.openweathermap.org/geo/1.0/direct?q=${userSearch}&limit=5&appid=${apiKey}`)
 .then(function(response){
   return response.json();
 }).then(function(data){
@@ -80,11 +107,13 @@ fetch(geoApiUrl)
     var windSpeed = document.getElementById("w3")
     var humidity = document.getElementById("w4")
     var uvi = document.getElementById("w5")
+    var icon = document.getElementById("ww1")
 
-    city.textContent = "City: " + data.name + ", " + today.format("L");
+    city.textContent = "City: " + data.name + ", " + today.format("L") ;
     temp.textContent = "Temp: " +  data.main.temp + " \u00B0 F";
     windSpeed.textContent = "Wind Speed: " + data.wind.speed + " MPH";
     humidity.textContent = "Humidity: " + data.main.humidity + " %";
+    icon.src = "http://openweathermap.org/img/wn/"+data.weather[0].icon+"@2x.png";
 
     box.setAttribute("style", "padding: 10px; border: 2px solid black;");
     // Geting UV index and appending it to HTML
@@ -97,6 +126,7 @@ fetch(geoApiUrl)
 
       uvi.textContent = "UV Index: " + data.current.uvi;
       // uvi.setAttribute("style", "background-color: green;");
+      getFiveDayForecast();
 
     })
     
@@ -104,10 +134,12 @@ fetch(geoApiUrl)
 }
 )};
 // 5 day forecast
-getFiveDayForecast();
+// getFiveDayForecast();
 
 function getFiveDayForecast(){
-  fetch(geoApiUrl)
+  var userSearch = document.getElementById('search').value;
+  console.log(userSearch);
+  fetch(`http://api.openweathermap.org/geo/1.0/direct?q=${userSearch}&limit=5&appid=${apiKey}`)
   .then(function(response){
     return response.json();
   }).then(function(data){
@@ -146,6 +178,7 @@ function getFiveDayForecast(){
     temp1.textContent = "Temp: " + data.list[3].main.temp + " \u00B0 F";
     windSpeed1.textContent = "Wind: " + data.list[3].wind.speed + " MPH";
     humidity1.textContent = "Humidity: " + data.list[3].main.humidity + " %";
+    icon1.src = "http://openweathermap.org/img/wn/"+data.list[3].weather[0].icon+"@2x.png";
     // Card 2
     console.log("icon2",data.list[11].weather[0].icon)
     console.log("temp2",data.list[11].main.temp)
@@ -165,6 +198,7 @@ function getFiveDayForecast(){
     temp2.textContent = "Temp: " + data.list[11].main.temp + " \u00B0 F";
     windSpeed2.textContent = "Wind: " + data.list[11].wind.speed + " MPH";
     humidity2.textContent = "Humidity: " + data.list[11].main.humidity + " %";
+    icon2.src = "http://openweathermap.org/img/wn/"+data.list[11].weather[0].icon+"@2x.png";
     // Card 3
     console.log("icon3",data.list[19].weather[0].icon)
     console.log("temp3",data.list[19].main.temp)
@@ -184,6 +218,7 @@ function getFiveDayForecast(){
     temp3.textContent = "Temp: " + data.list[19].main.temp + " \u00B0 F";
     windSpeed3.textContent = "Wind: " + data.list[19].wind.speed + " MPH";
     humidity3.textContent = "Humidity: " + data.list[19].main.humidity + " %";
+    icon3.src = "http://openweathermap.org/img/wn/"+data.list[19].weather[0].icon+"@2x.png";
     // Card 4
     console.log("icon4",data.list[27].weather[0].icon)
     console.log("temp4",data.list[27].main.temp)
@@ -203,6 +238,7 @@ function getFiveDayForecast(){
     temp4.textContent = "Temp: " + data.list[27].main.temp + " \u00B0 F";
     windSpeed4.textContent = "Wind: " + data.list[27].wind.speed + " MPH";
     humidity4.textContent = "Humidity: " + data.list[27].main.humidity + " %";
+    icon4.src = "http://openweathermap.org/img/wn/"+data.list[27].weather[0].icon+"@2x.png";
     // Card 5
     console.log("icon5",data.list[35].weather[0].icon)
     console.log("temp5",data.list[35].main.temp)
@@ -222,7 +258,32 @@ function getFiveDayForecast(){
     temp5.textContent = "Temp: " + data.list[35].main.temp + " \u00B0 F";
     windSpeed5.textContent = "Wind: " + data.list[35].wind.speed + " MPH";
     humidity5.textContent = "Humidity: " + data.list[35].main.humidity + " %";
-
+    icon5.src = "http://openweathermap.org/img/wn/"+data.list[35].weather[0].icon+"@2x.png";
   })
   })
 }
+
+function test () {
+var grabButton = document.getElementById('last-city')
+var search = document.getElementById('search')
+console.log("TEST BUTTON NAME",$(grabButton).text())
+userSearch = $(grabButton).text()
+};
+
+// Local storage function-------------------
+// Function to store input in local storage.
+// function userInput () {
+//   var input = document.getElementById('#search').value;
+//   localStorage.setItem("input", input);
+//   renderLastInput();
+// };
+// // Function to render input from local storage.
+// function renderLastInput() {
+//   var event1 = document.querySelector("#event1");
+//   var input = localStorage.getItem("input");
+//   event1.textContent = input;
+// };
+// // ------------------------------------
+// var userSearch = document.getElementById('search').value;
+// console.log(userSearch);
+// localStorage.setItem("", userSearch);
