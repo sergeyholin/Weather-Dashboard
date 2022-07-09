@@ -14,21 +14,22 @@
 
     <!-- Navbar -->
     <nav class="navbar navbar-light bg-info">
-      <span class="navbar-brand mb-0 h1"><h1 class="text-right">Weather Dashboard</h1></span>
+      <span class="navbar-brand mb-0 h1"><h1 id="test-h1">Weather Dashboard</h1></span>
     </nav>
 
     <!-- Search bar -->
     <section class="container-fluid">
       <div class="row">
-        <div class="col-12 col-md-4 col-lg-4 no-padding">
+        <div class="col-12 col-md-4 col-lg-4 ">
           <nav class="navbar navbar-light bg-light">
-                <p>Search for a city</p>
+                <h2>Search for a City:</h2>
                 <input class="form-control mr-sm-2" type="search" aria-label="Search" id="search"> 
-                <button type="button" onclick="getCurrentWeather();" class="btn btn-primary">Search</button>
-              <!-- <button type="button" class="btn btn-primary btn-lg btn-block">Search</button> -->
+                <!-- &nbsp; -->
+               
+                <button type="button" onclick="getCurrentWeather();" class="btn btn-primary btn-block" style="margin-top: 10px; margin-right: 10px;">Search</button>
           </nav>
 
-          <div class="col" id="center"></div>
+          <div class="col" id="center" style="padding-right: 25px;"></div>
         </div>
       
 

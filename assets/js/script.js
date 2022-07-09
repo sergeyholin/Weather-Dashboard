@@ -46,7 +46,7 @@ var apiKey = '7b95122b784c566e2d331e6ea12c89d2'
 var lat;
 var lon;
 var userSearch;
-var c;
+var cities = [];
 // var geoApiUrl = `http://api.openweathermap.org/geo/1.0/direct?q=${userSearch}&limit=5&appid=${apiKey}`
 // var currentWeatherApi = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${apiKey}`
 // var oneCallApi = `https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&appid=${apiKey}`
@@ -56,23 +56,25 @@ var today = moment();
 // Fetching geocode to get lat and lon
 
 function getCurrentWeather(){
-
+// Grabbing user input from input bar--------------------------
 var userSearch = document.getElementById('search').value;
 console.log("input",userSearch);
-// button.value = text
-var button = document.createElement("button");
-var p = document.createElement ("p")
-var body = document.getElementById("center")
-body.appendChild(button);
-button.textContent = userSearch;
-localStorage.setItem("cities", JSON.stringify(userSearch));
-button.setAttribute("class", "btn btn-primary btn-lg btn-block");
-// button.setAttribute("value", "userSearch");
-button.setAttribute("id", "last-city");
-button.setAttribute("onclick","test();");
-// button.setAttribute("onclick", "getCurrentWeather();");
+// ------------------------------------------------------------
+// Putting cities array into local storage-----------------
+cities.push(userSearch);
+localStorage.setItem("Cities", JSON.stringify(cities));
+// --------------------------------------------------------
+test();
 
-body.appendChild(p)
+// var button = document.createElement("button");
+// var p = document.createElement ("p")
+// var body = document.getElementById("center")
+// body.appendChild(button);
+// button.textContent = userSearch;
+// button.setAttribute("class", "btn btn-secondary btn-block");
+// button.setAttribute("id", "last-city");
+// button.setAttribute("onclick","test();");
+// body.appendChild(p)
 
 
 fetch(`http://api.openweathermap.org/geo/1.0/direct?q=${userSearch}&limit=5&appid=${apiKey}`)
@@ -264,14 +266,45 @@ function getFiveDayForecast(){
 }
 
 function test () {
-var grabButton = document.getElementById('last-city')
+// var grabButton = document.getElementById('last-city')
 var search = document.getElementById('search')
-console.log("TEST BUTTON NAME",$(grabButton).text())
-userSearch = $(grabButton).text()
-};
 
-// Local storage function-------------------
-// Function to store input in local storage.
+var input = JSON.parse(localStorage.getItem("Cities"));
+console.log(input)
+
+// search.textContent = input
+
+for (var i = 0; i < input.length; i++) {
+console.log(input[i]);
+
+
+
+
+
+
+var button = document.createElement("button");
+var p = document.createElement ("p")
+var body = document.getElementById("center")
+body.appendChild(button);
+button.textContent = input;
+button.setAttribute("class", "btn btn-secondary btn-block");
+button.setAttribute("id", "last-city");
+// button.setAttribute("onclick","test();");
+body.appendChild(p)
+
+};
+}
+
+console.log(cities);
+// var event1 = document.querySelector("#event1");
+//   var input = localStorage.getItem("input");
+//   event1.textContent = input;
+
+
+
+
+
+// // Function to store input in local storage.
 // function userInput () {
 //   var input = document.getElementById('#search').value;
 //   localStorage.setItem("input", input);
