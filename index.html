@@ -17,7 +17,7 @@
       <span class="navbar-brand mb-0 h1"><h1 id="test-h1">Weather Dashboard</h1></span>
     </nav>
 
-    <!-- Search bar -->
+    <!-- Search bar with button -->
     <section class="container-fluid">
       <div class="row">
         <div class="col-12 col-md-4 col-lg-4 ">
@@ -26,13 +26,12 @@
                 <input class="form-control" type="text" id="search" placeholder="Enter city to view weather">
                 <button type="button" onclick="getCurrentWeather();" class="btn btn-primary btn-block" style="margin-top: 10px; margin-right: 10px;" id="searchBtn">Search</button>
           </nav>
+          <!-- This Div will populate list with previosly searched cities -->
+          <div class="col" id="center" style="padding-right: 25px;"></div>
 
-          <div class="col" id="center" style="padding-right: 25px;">
-            <div></div>
-          </div>
         </div>
       
-
+        <!-- Current weather card -->
         <div class="col-12 col-md-8 col-lg-8">
           <div id="box" >
           <h2 id="w1"></h2>
@@ -42,9 +41,9 @@
           <p id="w4"></p>
           <p id="w5"></p>
           </div>
-
+          <!-- This will say "5-Day Forecast" -->
           <h4 id="h4"></h4>
-
+          <!-- 5 day forecast, card 1 -->
           <div class="row">
             <div class="col">
               <div id="box-1">
@@ -55,8 +54,7 @@
               <p id="w5-1"></p>
               </div>
             </div>
-            
-    
+            <!-- Card 2 -->
             <div class="col">
               <div id="box-2">
               <h5 id="w1-2"></h5>
@@ -66,7 +64,7 @@
               <p id="w5-2"></p>
               </div>
             </div>
-    
+            <!-- Card 3 -->
             <div class="col">
               <div id="box-3">
               <h5 id="w1-3"></h5>
@@ -76,7 +74,7 @@
               <p id="w5-3"></p>
               </div>
             </div>
-    
+            <!-- Card 4 -->
             <div class="col">
               <div id="box-4">
               <h5 id="w1-4"></h5>
@@ -86,7 +84,7 @@
               <p id="w5-4"></p>
               </div>
             </div>
-    
+            <!-- Card 5 -->
             <div class="col">
               <div id="box-5">
               <h5 id="w1-5"></h5>
