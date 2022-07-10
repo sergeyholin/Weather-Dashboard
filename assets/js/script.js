@@ -48,8 +48,8 @@ var apiKey = '15164c9b619701724959dab0745876ae'
 var lat;
 var lon;
 var userSearch;
-var cities = [];
-var searchHistoryList = [];
+// var cities = [];
+var searchHistory = [];
 // var geoApiUrl = `http://api.openweathermap.org/geo/1.0/direct?q=${userSearch}&limit=5&appid=${apiKey}`
 // var currentWeatherApi = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${apiKey}`
 // var oneCallApi = `https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&appid=${apiKey}`
@@ -60,23 +60,58 @@ var today = moment();
 
 function getCurrentWeather(){
 // Grabbing user input from input bar--------------------------
-var userSearch = document.getElementById('search').value;
-console.log("input",userSearch);
+// var userSearch = document.getElementById('search').value;
+// console.log("input",userSearch);
 // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-var city = $("#search").val().trim()
-if (!searchHistoryList.includes(city)) {
-  searchHistoryList.push(city);
-  var searchedCity = $(`
-      <li class="list-group-item">${city}</li>
-      `);
+// var city = $("#search").val().trim()
+// if (!searchHistoryList.includes(city)) {
+//   searchHistoryList.push(city);
+//   var searchedCity = $(`
+//       <li class="list-group-item">${city}</li>
+//       `);
+//   $("#center").append(searchedCity);
+// };
+
+// localStorage.setItem("city", JSON.stringify(searchHistoryList));
+// console.log(searchHistoryList);
+// !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+// This line of code gets user input, stores it in the array and local storage, and creates and appends the button with the city name under search bar.
+var userSearch = $("#search").val().trim()
+if (!searchHistory.includes(userSearch)) {
+  searchHistory.push(userSearch);
+  var searchedCity = $(`<button class="btn btn-secondary btn-block" id="test">${userSearch}</button>`);
   $("#center").append(searchedCity);
 };
-
-localStorage.setItem("city", JSON.stringify(searchHistoryList));
-console.log(searchHistoryList);
-// !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-
+// -----------------------------------------------------------------------------------------------
+localStorage.setItem("city", JSON.stringify(searchHistory));
+console.log(searchHistory);
+// This line of code clears input field, when one of the previosly searched cities is pushed.
+$(document).on("click", "#test", function() {
+  document.getElementById("search").value = "";
+});
+// This line of code puts the name of the city on the button into the input form and starts the weather command.
+$(document).on("click", "#test", function() {
+  var listCity = $(this).text();
+  console.log(listCity)
+  var text = document.getElementById('search');
+  text.value += listCity;
+  getCurrentWeather();
+});
 // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+// This line of code clears input field, when one of the previosly searched cities is pushed.
+// $(document).on("click", ".list-group-item", function() {
+//   document.getElementById("search").value = "";
+// });
+// // This line of code puts the name of the city on the button into the input form and starts the weather command.
+// $(document).on("click", ".list-group-item", function() {
+//   var listCity = $(this).text();
+//   console.log(listCity)
+//   var text = document.getElementById('search');
+//   // text.value += "";
+//   text.value += listCity;
+//   getCurrentWeather();
+// });
+// !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 // ------------------------------------------------------------
 // Putting cities array into local storage-----------------
 // cities.push(userSearch);
@@ -325,24 +360,24 @@ body.appendChild(p)
 };
 }
 
-console.log(cities);
+// console.log(cities);
 // var event1 = document.querySelector("#event1");
 //   var input = localStorage.getItem("input");
 //   event1.textContent = input;
 
 
-$(document).on("click", ".list-group-item", function() {
-  document.getElementById("search").value = "";
-});
+// $(document).on("click", ".list-group-item", function() {
+//   document.getElementById("search").value = "";
+// });
 
-$(document).on("click", ".list-group-item", function() {
-  var listCity = $(this).text();
-  console.log(listCity)
-  var text = document.getElementById('search');
-  // text.value += "";
-  text.value += listCity;
-  getCurrentWeather();
-});
+// $(document).on("click", ".list-group-item", function() {
+//   var listCity = $(this).text();
+//   console.log(listCity)
+//   var text = document.getElementById('search');
+//   // text.value += "";
+//   text.value += listCity;
+//   getCurrentWeather();
+// });
 
 // $.each($('#search'), function () {
 //   $(this).val(""); })
