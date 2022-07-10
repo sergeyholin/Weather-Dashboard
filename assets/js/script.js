@@ -1,13 +1,12 @@
 // ===============================================================================================
-var apiKey = '7b95122b784c566e2d331e6ea12c89d2'
-// var apiKey = '15164c9b619701724959dab0745876ae'
+var apiKey = 'f517beb5dd7c96915a88f80b6509932d'
 var lat;
 var lon;
 var userSearch;
 var searchHistory = [];
 var today = moment();
 // Main get the weather function===================================================================
-function getCurrentWeather(){
+function getWeather(){
 // This line of code gets user input, stores it in the array and creates and appends the button with the city name under search bar.
 var userSearch = $("#search").val().trim()
 if (!searchHistory.includes(userSearch)) {
@@ -28,7 +27,7 @@ $(document).on("click", "#city-button", function() {
   console.log(listCity)
   var text = document.getElementById('search');
   text.value += listCity;
-  getCurrentWeather();
+  getWeather();
 });
 // Getting Geolocation
 fetch(`http://api.openweathermap.org/geo/1.0/direct?q=${userSearch}&limit=5&appid=${apiKey}`)
@@ -84,11 +83,11 @@ fetch(`http://api.openweathermap.org/geo/1.0/direct?q=${userSearch}&limit=5&appi
   // Setting color code on UVI
   if (uvIndex >= 0 && uvIndex <= 3) {
     $("#uvi-color").css("background-color", "green")
-  } else if (uvIndex >= 4 && uvIndex <= 6) {
+  } else if (uvIndex >= 3 && uvIndex <= 6) {
     $("#uvi-color").css("background-color", "yellow")
-  } else if (uvIndex >= 7 && uvIndex <= 9) {
+  } else if (uvIndex >= 6 && uvIndex <= 9) {
     $("#uvi-color").css("background-color", "orange")
-  } else if (uvIndex >= 10) {
+  } else if (uvIndex >= 9) {
     $("#uvi-color").css("background-color", "red")
   };
   // Activating 5 day forecast function
@@ -121,10 +120,10 @@ function getFiveDayForecast(){
   }).then(function(data){
     console.log(data);
     // Card 1, grabbing the data that i need----------------------------------------------------------
-    console.log("icon1",data.list[6].weather[0].icon)
-    console.log("temp1",data.list[6].main.temp)
-    console.log("wind1",data.list[6].wind.speed)
-    console.log("humidity1",data.list[6].main.humidity)
+    console.log("icon1",data.list[1].weather[0].icon)
+    console.log("temp1",data.list[1].main.temp)
+    console.log("wind1",data.list[1].wind.speed)
+    console.log("humidity1",data.list[1].main.humidity)
     // Dynamically appending data to the HTML
     var h4 = document.getElementById("h4")
     var day1 = moment().add(1,'days');
@@ -138,15 +137,15 @@ function getFiveDayForecast(){
     box1.setAttribute("style", "color: white; background-color: grey; padding-left: 10px; padding-bottom: 1px;");
     h4.textContent = "5-Day Forecast:";
     date1.textContent = day1.format("L");
-    temp1.textContent = "Temp: " + data.list[6].main.temp + " \u00B0 F";
-    windSpeed1.textContent = "Wind: " + data.list[6].wind.speed + " MPH";
-    humidity1.textContent = "Humidity: " + data.list[6].main.humidity + " %";
-    icon1.src = "http://openweathermap.org/img/wn/"+data.list[6].weather[0].icon+"@2x.png";
+    temp1.textContent = "Temp: " + data.list[1].main.temp + " \u00B0 F";
+    windSpeed1.textContent = "Wind: " + data.list[1].wind.speed + " MPH";
+    humidity1.textContent = "Humidity: " + data.list[1].main.humidity + " %";
+    icon1.src = "http://openweathermap.org/img/wn/"+data.list[1].weather[0].icon+"@2x.png";
     // Card 2, grabbing the data that i need----------------------------------------------------------
-    console.log("icon2",data.list[14].weather[0].icon)
-    console.log("temp2",data.list[14].main.temp)
-    console.log("wind2",data.list[14].wind.speed)
-    console.log("humidity2",data.list[14].main.humidity)
+    console.log("icon2",data.list[9].weather[0].icon)
+    console.log("temp2",data.list[9].main.temp)
+    console.log("wind2",data.list[9].wind.speed)
+    console.log("humidity2",data.list[9].main.humidity)
     // Dynamically appending data to the HTML
     var day2 = moment().add(2,'days');
     var box2 = document.getElementById("box-2")
@@ -158,15 +157,15 @@ function getFiveDayForecast(){
      // Adding styling, icon & units of measurement to data
     box2.setAttribute("style", "color: white; background-color: grey; padding-left: 10px; padding-bottom: 1px;");
     date2.textContent = day2.format("L");
-    temp2.textContent = "Temp: " + data.list[14].main.temp + " \u00B0 F";
-    windSpeed2.textContent = "Wind: " + data.list[14].wind.speed + " MPH";
-    humidity2.textContent = "Humidity: " + data.list[14].main.humidity + " %";
-    icon2.src = "http://openweathermap.org/img/wn/"+data.list[14].weather[0].icon+"@2x.png";
+    temp2.textContent = "Temp: " + data.list[9].main.temp + " \u00B0 F";
+    windSpeed2.textContent = "Wind: " + data.list[9].wind.speed + " MPH";
+    humidity2.textContent = "Humidity: " + data.list[9].main.humidity + " %";
+    icon2.src = "http://openweathermap.org/img/wn/"+data.list[9].weather[0].icon+"@2x.png";
     // Card 3, grabbing the data that i need----------------------------------------------------------
-    console.log("icon3",data.list[22].weather[0].icon)
-    console.log("temp3",data.list[22].main.temp)
-    console.log("wind3",data.list[22].wind.speed)
-    console.log("humidity3",data.list[22].main.humidity)
+    console.log("icon3",data.list[17].weather[0].icon)
+    console.log("temp3",data.list[17].main.temp)
+    console.log("wind3",data.list[17].wind.speed)
+    console.log("humidity3",data.list[17].main.humidity)
     // Dynamically appending data to the HTML
     var day3 = moment().add(3,'days');
     var box3 = document.getElementById("box-3")
@@ -178,15 +177,15 @@ function getFiveDayForecast(){
      // Adding styling, icon & units of measurement to data
     box3.setAttribute("style", "color: white; background-color: grey; padding-left: 10px; padding-bottom: 1px;");
     date3.textContent = day3.format("L");
-    temp3.textContent = "Temp: " + data.list[22].main.temp + " \u00B0 F";
-    windSpeed3.textContent = "Wind: " + data.list[22].wind.speed + " MPH";
-    humidity3.textContent = "Humidity: " + data.list[22].main.humidity + " %";
-    icon3.src = "http://openweathermap.org/img/wn/"+data.list[22].weather[0].icon+"@2x.png";
+    temp3.textContent = "Temp: " + data.list[17].main.temp + " \u00B0 F";
+    windSpeed3.textContent = "Wind: " + data.list[17].wind.speed + " MPH";
+    humidity3.textContent = "Humidity: " + data.list[17].main.humidity + " %";
+    icon3.src = "http://openweathermap.org/img/wn/"+data.list[17].weather[0].icon+"@2x.png";
     // Card 4, grabbing the data that i need----------------------------------------------------------
-    console.log("icon4",data.list[30].weather[0].icon)
-    console.log("temp4",data.list[30].main.temp)
-    console.log("wind4",data.list[30].wind.speed)
-    console.log("humidity4",data.list[30].main.humidity)
+    console.log("icon4",data.list[25].weather[0].icon)
+    console.log("temp4",data.list[25].main.temp)
+    console.log("wind4",data.list[25].wind.speed)
+    console.log("humidity4",data.list[25].main.humidity)
     // Dynamically appending data to the HTML
     var day4 = moment().add(4,'days');
     var box4 = document.getElementById("box-4")
@@ -198,15 +197,15 @@ function getFiveDayForecast(){
      // Adding styling, icon & units of measurement to data
     box4.setAttribute("style", "color: white; background-color: grey; padding-left: 10px; padding-bottom: 1px;");
     date4.textContent = day4.format("L");
-    temp4.textContent = "Temp: " + data.list[30].main.temp + " \u00B0 F";
-    windSpeed4.textContent = "Wind: " + data.list[30].wind.speed + " MPH";
-    humidity4.textContent = "Humidity: " + data.list[30].main.humidity + " %";
-    icon4.src = "http://openweathermap.org/img/wn/"+data.list[30].weather[0].icon+"@2x.png";
+    temp4.textContent = "Temp: " + data.list[25].main.temp + " \u00B0 F";
+    windSpeed4.textContent = "Wind: " + data.list[25].wind.speed + " MPH";
+    humidity4.textContent = "Humidity: " + data.list[25].main.humidity + " %";
+    icon4.src = "http://openweathermap.org/img/wn/"+data.list[25].weather[0].icon+"@2x.png";
     // Card 5, grabbing the data that i need----------------------------------------------------------
-    console.log("icon5",data.list[38].weather[0].icon)
-    console.log("temp5",data.list[38].main.temp)
-    console.log("wind5",data.list[38].wind.speed)
-    console.log("humidity5",data.list[38].main.humidity)
+    console.log("icon5",data.list[33].weather[0].icon)
+    console.log("temp5",data.list[33].main.temp)
+    console.log("wind5",data.list[33].wind.speed)
+    console.log("humidity5",data.list[33].main.humidity)
     // Dynamically appending data to the HTML
     var day5 = moment().add(5,'days');
     var box5 = document.getElementById("box-5")
@@ -218,36 +217,11 @@ function getFiveDayForecast(){
      // Adding styling, icon & units of measurement to data
     box5.setAttribute("style", "color: white; background-color: grey; padding-left: 10px; padding-bottom: 1px;");
     date5.textContent = day5.format("L");
-    temp5.textContent = "Temp: " + data.list[38].main.temp + " \u00B0 F";
-    windSpeed5.textContent = "Wind: " + data.list[38].wind.speed + " MPH";
-    humidity5.textContent = "Humidity: " + data.list[38].main.humidity + " %";
-    icon5.src = "http://openweathermap.org/img/wn/"+data.list[38].weather[0].icon+"@2x.png";
+    temp5.textContent = "Temp: " + data.list[33].main.temp + " \u00B0 F";
+    windSpeed5.textContent = "Wind: " + data.list[33].wind.speed + " MPH";
+    humidity5.textContent = "Humidity: " + data.list[33].main.humidity + " %";
+    icon5.src = "http://openweathermap.org/img/wn/"+data.list[33].weather[0].icon+"@2x.png";
   })
   })
 };
 // ===================================================================================================
-// // Pushing input to array and local storage
-// var cities = [];
-// cities.push(userSearch);
-// localStorage.setItem("Cities", JSON.stringify(cities));
-// // Creating and appending
-// var button = document.createElement("button");
-// var p = document.createElement ("p")
-// var body = document.getElementById("center")
-// body.appendChild(button);
-// button.textContent = userSearch;
-// button.setAttribute("class", "btn btn-secondary btn-block");
-// button.setAttribute("id", "last-city");
-// button.setAttribute("onclick","test();");
-// body.appendChild(p)
-// // ------------------------------------------------
-// function test () {
-//   var grabButton = document.getElementById('last-city')
-//   var search = document.getElementById('search')
-//   var input = JSON.parse(localStorage.getItem("Cities"));
-//   console.log(input)
-//   // search.textContent = input
-//   for (var i = 0; i < input.length; i++) {
-//   console.log(input[i]);
-//   };
-//   }
