@@ -32,8 +32,10 @@
 // WHEN I click on a city in the search history
 // THEN I am again presented with current and future conditions for that city
 // ===============================================================================================
-var apiKey = '7b95122b784c566e2d331e6ea12c89d2'
-// var apiKey2 = 'f517beb5dd7c96915a88f80b6509932d'
+// var apiKey = '7b95122b784c566e2d331e6ea12c89d2'
+
+var apiKey = '15164c9b619701724959dab0745876ae'
+
 // Later userSearch will be the value from my search form. It will go something like this:[var userSearch = document.getElementById('#searchInput').value]
 
 
@@ -47,6 +49,7 @@ var lat;
 var lon;
 var userSearch;
 var cities = [];
+var searchHistoryList = [];
 // var geoApiUrl = `http://api.openweathermap.org/geo/1.0/direct?q=${userSearch}&limit=5&appid=${apiKey}`
 // var currentWeatherApi = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${apiKey}`
 // var oneCallApi = `https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&appid=${apiKey}`
@@ -59,12 +62,27 @@ function getCurrentWeather(){
 // Grabbing user input from input bar--------------------------
 var userSearch = document.getElementById('search').value;
 console.log("input",userSearch);
+// !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+var city = $("#search").val().trim()
+if (!searchHistoryList.includes(city)) {
+  searchHistoryList.push(city);
+  var searchedCity = $(`
+      <li class="list-group-item">${city}</li>
+      `);
+  $("#center").append(searchedCity);
+};
+
+localStorage.setItem("city", JSON.stringify(searchHistoryList));
+console.log(searchHistoryList);
+// !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+// !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 // ------------------------------------------------------------
 // Putting cities array into local storage-----------------
-cities.push(userSearch);
-localStorage.setItem("Cities", JSON.stringify(cities));
+// cities.push(userSearch);
+// localStorage.setItem("Cities", JSON.stringify(cities));
 // --------------------------------------------------------
-test();
+// test();
 
 // var button = document.createElement("button");
 // var p = document.createElement ("p")
@@ -75,6 +93,18 @@ test();
 // button.setAttribute("id", "last-city");
 // button.setAttribute("onclick","test();");
 // body.appendChild(p)
+
+
+ 
+
+
+
+
+
+
+
+
+
 
 
 fetch(`http://api.openweathermap.org/geo/1.0/direct?q=${userSearch}&limit=5&appid=${apiKey}`)
@@ -269,7 +299,7 @@ function test () {
 // var grabButton = document.getElementById('last-city')
 var search = document.getElementById('search')
 
-var input = JSON.parse(localStorage.getItem("Cities"));
+// var input = JSON.parse(localStorage.getItem("Cities"));
 console.log(input)
 
 // search.textContent = input
@@ -301,8 +331,21 @@ console.log(cities);
 //   event1.textContent = input;
 
 
+$(document).on("click", ".list-group-item", function() {
+  document.getElementById("search").value = "";
+});
 
+$(document).on("click", ".list-group-item", function() {
+  var listCity = $(this).text();
+  console.log(listCity)
+  var text = document.getElementById('search');
+  // text.value += "";
+  text.value += listCity;
+  getCurrentWeather();
+});
 
+// $.each($('#search'), function () {
+//   $(this).val(""); })
 
 // // Function to store input in local storage.
 // function userInput () {
@@ -320,3 +363,42 @@ console.log(cities);
 // var userSearch = document.getElementById('search').value;
 // console.log(userSearch);
 // localStorage.setItem("", userSearch);
+// ###########################################################################
+
+// add on click event listener 
+// $("#searchBtn").on("click", function(event) {
+//   event.preventDefault();
+
+//   var city = $("#search").val().trim();
+//   getCurrentWeather(city);
+//   if (!searchHistoryList.includes(city)) {
+//       searchHistoryList.push(city);
+//       var searchedCity = $(`
+//           <li class="list-group-item">${city}</li>
+//           `);
+//       $("#searchHistory").append(searchedCity);
+//   };
+  
+//   localStorage.setItem("city", JSON.stringify(searchHistoryList));
+//   console.log(searchHistoryList);
+// });
+// *********************************************************************************
+// WHEN I click on a city in the search history
+// THEN I am again presented with current and future conditions for that city
+// $(document).on("click", ".list-group-item", function() {
+//   var listCity = $(this).text();
+//   getCurrentWeather(listCity);
+// });
+// // **************************************************************
+// // WHEN I open the weather dashboard
+// // THEN I am presented with the last searched city forecast
+// $(document).ready(function() {
+//   var searchHistoryArr = JSON.parse(localStorage.getItem("city"));
+
+//   if (searchHistoryArr !== null) {
+//       var lastSearchedIndex = searchHistoryArr.length - 1;
+//       var lastSearchedCity = searchHistoryArr[lastSearchedIndex];
+//       getCurrentWeather(lastSearchedCity);
+//       console.log(`Last searched city: ${lastSearchedCity}`);
+//   }
+// });
