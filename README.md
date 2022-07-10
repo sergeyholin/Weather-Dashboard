@@ -1,9 +1,9 @@
 # Weather-Dashboard
 Module 6 Challenge: Weather Dashboard by Sergey Holin
 
-GitHub Repo Link: https://github.com/sergeyholin/Weather-Dashboard-App
+GitHub Repo Link: https://github.com/sergeyholin/Weather-Dashboard
 
-GitHub Live Deployment Link: https://sergeyholin.github.io/Weather-Dashboard-App/
+GitHub Live Deployment Link: https://sergeyholin.github.io/Weather-Dashboard/
 
 ABOUT THE APP:
 
@@ -27,7 +27,9 @@ ADDITIONAL CRITERIA:
 
 Application deployed at live URL.
 
-SOURCES/CITATIONS: Some of my code (populate previosly searched cities with clickable buttons (lines:11-31) as well as UVI color coding (lines:80-92)) was inspired by a work of Mengmei Tu on a similar project, Link: https://github.com/mmeii/weather-dashboard
+SOURCES/CITATIONS: 
+
+Some of my code (populate previosly searched cities with clickable buttons (lines:11-31) as well as UVI color coding (lines:80-92)) was inspired by a work of Mengmei Tu on a similar project, Link: https://github.com/mmeii/weather-dashboard
 
 TECHNOLOGIES USED: 
 
