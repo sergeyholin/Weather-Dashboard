@@ -30,7 +30,7 @@ $(document).on("click", "#city-button", function() {
   getWeather();
 });
 // Getting Geolocation
-fetch(`http://api.openweathermap.org/geo/1.0/direct?q=${userSearch}&limit=5&appid=${apiKey}`)
+fetch(`https://api.openweathermap.org/geo/1.0/direct?q=${userSearch}&limit=5&appid=${apiKey}`)
 .then(function(response){
   return response.json();
 }).then(function(data){
@@ -65,7 +65,7 @@ fetch(`http://api.openweathermap.org/geo/1.0/direct?q=${userSearch}&limit=5&appi
   temp.textContent = "Temp: " +  data.main.temp + " \u00B0 F";
   windSpeed.textContent = "Wind Speed: " + data.wind.speed + " MPH";
   humidity.textContent = "Humidity: " + data.main.humidity + " %";
-  icon.src = "http://openweathermap.org/img/wn/"+data.weather[0].icon+"@2x.png";
+  icon.src = "https://openweathermap.org/img/wn/"+data.weather[0].icon+"@2x.png";
   box.setAttribute("style", "padding: 10px; border: 2px solid black;");
   // Geting UV index and appending it to HTML---------------------------------------------------------
   fetch(`https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&appid=${apiKey}&units=imperial`)
@@ -102,7 +102,7 @@ function getFiveDayForecast(){
   var userSearch = document.getElementById('search').value;
   console.log(userSearch);
   // Fetching Geolocation function API
-  fetch(`http://api.openweathermap.org/geo/1.0/direct?q=${userSearch}&limit=5&appid=${apiKey}`)
+  fetch(`https://api.openweathermap.org/geo/1.0/direct?q=${userSearch}&limit=5&appid=${apiKey}`)
   .then(function(response){
     return response.json();
   }).then(function(data){
@@ -140,7 +140,7 @@ function getFiveDayForecast(){
     temp1.textContent = "Temp: " + data.list[1].main.temp + " \u00B0 F";
     windSpeed1.textContent = "Wind: " + data.list[1].wind.speed + " MPH";
     humidity1.textContent = "Humidity: " + data.list[1].main.humidity + " %";
-    icon1.src = "http://openweathermap.org/img/wn/"+data.list[1].weather[0].icon+"@2x.png";
+    icon1.src = "https://openweathermap.org/img/wn/"+data.list[1].weather[0].icon+"@2x.png";
     // Card 2, grabbing the data that i need----------------------------------------------------------
     console.log("icon2",data.list[9].weather[0].icon)
     console.log("temp2",data.list[9].main.temp)
@@ -160,7 +160,7 @@ function getFiveDayForecast(){
     temp2.textContent = "Temp: " + data.list[9].main.temp + " \u00B0 F";
     windSpeed2.textContent = "Wind: " + data.list[9].wind.speed + " MPH";
     humidity2.textContent = "Humidity: " + data.list[9].main.humidity + " %";
-    icon2.src = "http://openweathermap.org/img/wn/"+data.list[9].weather[0].icon+"@2x.png";
+    icon2.src = "https://openweathermap.org/img/wn/"+data.list[9].weather[0].icon+"@2x.png";
     // Card 3, grabbing the data that i need----------------------------------------------------------
     console.log("icon3",data.list[17].weather[0].icon)
     console.log("temp3",data.list[17].main.temp)
@@ -180,7 +180,7 @@ function getFiveDayForecast(){
     temp3.textContent = "Temp: " + data.list[17].main.temp + " \u00B0 F";
     windSpeed3.textContent = "Wind: " + data.list[17].wind.speed + " MPH";
     humidity3.textContent = "Humidity: " + data.list[17].main.humidity + " %";
-    icon3.src = "http://openweathermap.org/img/wn/"+data.list[17].weather[0].icon+"@2x.png";
+    icon3.src = "https://openweathermap.org/img/wn/"+data.list[17].weather[0].icon+"@2x.png";
     // Card 4, grabbing the data that i need----------------------------------------------------------
     console.log("icon4",data.list[25].weather[0].icon)
     console.log("temp4",data.list[25].main.temp)
@@ -200,7 +200,7 @@ function getFiveDayForecast(){
     temp4.textContent = "Temp: " + data.list[25].main.temp + " \u00B0 F";
     windSpeed4.textContent = "Wind: " + data.list[25].wind.speed + " MPH";
     humidity4.textContent = "Humidity: " + data.list[25].main.humidity + " %";
-    icon4.src = "http://openweathermap.org/img/wn/"+data.list[25].weather[0].icon+"@2x.png";
+    icon4.src = "https://openweathermap.org/img/wn/"+data.list[25].weather[0].icon+"@2x.png";
     // Card 5, grabbing the data that i need----------------------------------------------------------
     console.log("icon5",data.list[33].weather[0].icon)
     console.log("temp5",data.list[33].main.temp)
@@ -220,7 +220,7 @@ function getFiveDayForecast(){
     temp5.textContent = "Temp: " + data.list[33].main.temp + " \u00B0 F";
     windSpeed5.textContent = "Wind: " + data.list[33].wind.speed + " MPH";
     humidity5.textContent = "Humidity: " + data.list[33].main.humidity + " %";
-    icon5.src = "http://openweathermap.org/img/wn/"+data.list[33].weather[0].icon+"@2x.png";
+    icon5.src = "https://openweathermap.org/img/wn/"+data.list[33].weather[0].icon+"@2x.png";
   })
   })
 };
